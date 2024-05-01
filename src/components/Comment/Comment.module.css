@@ -1,0 +1,13 @@
+.commentHead,
+.commentText,
+.commentAuthor,
+.commentTime {
+  margin: 0;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 400;
+}
+
+.comment {
+  border: 1px solid black;
+}

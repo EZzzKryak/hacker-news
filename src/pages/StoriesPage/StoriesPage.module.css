@@ -1,0 +1,24 @@
+.storiesList {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.link {
+  text-decoration: none;
+  color: #000;
+}
+
+.title,
+.rating,
+.data,
+.author {
+  margin: 0;
+}
+
+.story {
+  padding: 10px;
+  border: #333 solid 1px;
+}
