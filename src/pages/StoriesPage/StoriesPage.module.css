@@ -1,4 +1,5 @@
 .storiesList {
+  margin: 10px 20px;
   list-style: none;
   padding: 0;
   display: flex;
@@ -9,16 +10,49 @@
 .link {
   text-decoration: none;
   color: #000;
+  &:hover {
+    text-decoration: none;
+  }
 }
 
-.title,
+.title {
+  display: inline-block;
+}
 .rating,
-.data,
+.time,
 .author {
   margin: 0;
 }
 
-.story {
-  padding: 10px;
-  border: #333 solid 1px;
+.time {
+  font-style: italic;
+}
+
+.card {
+  padding: 15px;
+  transition: background-color 0.2s ease;
+  &:hover {
+    background-color: #f0f0f0;
+  }
+}
+
+.cardHead {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 0 0 10px;
+}
+
+.cardText {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+.spinner {
+  margin: 30px 0;
+}
+
+.refreshBtn {
+  margin: 0 20px;
 }

@@ -1,0 +1,13 @@
+.comments {
+    margin-top: 20px;
+}
+
+.commentsHead {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.refreshBtn {
+    margin-left: auto;
+}

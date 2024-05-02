@@ -4,3 +4,7 @@
   gap: 10px;
   list-style: none;
 }
+
+.container {
+  padding: 0 15px;
+}

@@ -1,61 +1,39 @@
-import { useQueries } from "@tanstack/react-query";
-import { Item, getItem } from "../../api/hackernews-api";
+import { Button, Counter, Div, Group, Title } from "@vkontakte/vkui";
 import Comments from "../Comments/Comments";
 import cls from "./CommentsLayout.module.css";
+import { useState } from "react";
+import { Item } from "../../types/types";
 
 interface CommentsLayoutProps {
   item: Item | undefined;
-  refetchStory?: () => void;
+  refreshComments: () => void;
 }
 
-const CommentsLayout = ({ item, refetchStory }: CommentsLayoutProps) => {
-  const commentsData = useQueries({
-    queries: item?.kids
-      ? item.kids?.map(commentId => {
-          return {
-            queryKey: ["comments", commentId],
-            queryFn: () => getItem(commentId),
-            refetchOnWindowFocus: false,
-          };
-        })
-      : [],
-    combine: results => {
-      return {
-        data: results.map(result => result.data),
-        pending: results.some(result => result.isPending),
-        refetchAllComments: () => results.forEach(result => result.refetch()),
-      };
-    },
-  });
-  const refreshComments = () => {
-    // for parent comments
-    if (refetchStory) {
-      refetchStory();
-    }
-    // for children comments
-    commentsData.refetchAllComments();
+const CommentsLayout = ({ item, refreshComments }: CommentsLayoutProps) => {
+  const [commentsCount, setCommentsCount] = useState<number>(0);
+
+  const handleSetCommentsCount = (count: number) => {
+    setCommentsCount(count);
   };
 
-  const notDeletedComments = commentsData.data.filter(comment => {
-    return !comment?.deleted;
-  });
-
   return (
-    <div>
-      <p className={cls.commentsHead}>
-        Комментарии:{" "}
-        {!commentsData.pending && <span>{notDeletedComments.length}</span>}
-      </p>
-
-      <button className={cls.refreshBtn} onClick={refreshComments}>
-        Обновить комментарии
-      </button>
-      {commentsData.pending ? (
-        <p>Загрузка комментариев...</p>
-      ) : (
-        <Comments notDeletedComments={notDeletedComments} />
-      )}
-    </div>
+    <Group className={cls.comments}>
+      <Div className={cls.commentsHead}>
+        <Title level="3">Комментарии</Title>
+        <Counter mode="primary" style={{ display: "inline-block" }}>
+          {commentsCount}
+        </Counter>
+        <Button
+          size="l"
+          mode="secondary"
+          className={cls.refreshBtn}
+          onClick={refreshComments}
+        >
+          Обновить комментарии
+        </Button>
+      </Div>
+      <Comments handleSetCommentsCount={handleSetCommentsCount} item={item} />
+    </Group>
   );
 };
 

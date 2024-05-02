@@ -1,0 +1,27 @@
+.link {
+    margin-right: auto;
+}
+
+.card {
+    padding: 20px;
+    margin: 10px 20px;
+}
+
+.cardText {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin-top: 15px;
+}
+
+.cardHead {
+    padding: 0;
+}
+
+.spinner {
+    margin: 50px 0;
+}
+
+.time {
+    font-style: italic;
+}

@@ -1,20 +1,5 @@
 import axios from "axios";
-
-export type Ids = number[];
-export interface Item {
-  by: string;
-  descendants: number;
-  id: number;
-  score: number;
-  time: number;
-  title: string;
-  // type сделать enum
-  type: string;
-  url: string;
-  kids?: number[];
-  text: string;
-  deleted?: boolean;
-}
+import { Ids, Item } from "../types/types";
 
 export const getItem = async (id: number | undefined) => {
   try {

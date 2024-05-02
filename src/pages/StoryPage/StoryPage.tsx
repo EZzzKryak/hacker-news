@@ -1,16 +1,30 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams, useRouteNavigator } from "@vkontakte/vk-mini-apps-router";
-import { Button, Link } from "@vkontakte/vkui";
+import {
+  Card,
+  Div,
+  Link,
+  Panel,
+  PanelHeader,
+  PanelHeaderBack,
+  Paragraph,
+  Spinner,
+  Title,
+} from "@vkontakte/vkui";
 import { getItem } from "../../api/hackernews-api";
-import Comments from "../../components/Comments/Comments";
 import { formatTime } from "../../utils/utils";
 import cls from "./StoryPage.module.css";
+import CommentsLayout from "../../components/CommentsLayout/CommentsLayout";
 
 const StoryPage = () => {
   const params = useParams();
   const routeNavigator = useRouteNavigator();
 
-  const { data: story, refetch } = useQuery({
+  const {
+    data: story,
+    refetch,
+    isPending,
+  } = useQuery({
     queryKey: ["story", params?.id],
     queryFn: () => getItem(Number(params?.id)),
     refetchOnWindowFocus: false,
@@ -21,27 +35,33 @@ const StoryPage = () => {
   };
 
   return (
-    <section className={cls.story}>
-      <Button className={cls.backBtn} onClick={() => routeNavigator.back()}>
-        Вернуться
-      </Button>
-      <h2>{story?.title}</h2>
-      <p className={cls.author}>Пользователь: {story?.by}</p>
-      <div className={cls.rating}>Рейтинг: {story?.score} голосов</div>
-      <p className={cls.data}>
-        Дата публикации: {formatTime(story?.time as number)}
-      </p>
-      <Link target="_blank" href={story?.url}>
-        Ссылка на новость
-      </Link>
-
-      {/* comments layout */}
-      <h3>Комментарии</h3>
-      <Button className={cls.refreshBtn} onClick={refreshComments}>
-        Обновить комментарии
-      </Button>
-      <Comments item={story} />
-    </section>
+    <Panel>
+      <PanelHeader
+        before={<PanelHeaderBack onClick={() => routeNavigator.back()} />}
+        className={cls.panelHeader}
+      >
+        На главную
+      </PanelHeader>
+      {isPending ? (
+        <Spinner size="large" className={cls.spinner} />
+      ) : (
+        <Card className={cls.card} mode="outline">
+          <Div className={cls.cardHead}>
+            <Title level="1">{story?.title}</Title>
+            <Link target="_blank" href={story?.url} className={cls.link}>
+              Перейти к новости
+            </Link>
+          </Div>
+          <Div className={cls.cardText}>
+            <Paragraph className={cls.author}>Автор: {story?.by}</Paragraph>
+            <Paragraph className={cls.time}>
+              Опубликовано: {formatTime(story?.time as number)}
+            </Paragraph>
+          </Div>
+          <CommentsLayout item={story} refreshComments={refreshComments} />
+        </Card>
+      )}
+    </Panel>
   );
 };
 
