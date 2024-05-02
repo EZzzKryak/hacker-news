@@ -1,5 +1,6 @@
 {
   "name": "hacker-news-vk-test",
+  "homepage": ".",
   "private": true,
   "version": "0.0.0",
   "type": "module",
