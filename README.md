@@ -7,11 +7,11 @@
 ## 🔗 Ссылки
 __ID 51914828__
 
-[vk.com](https://stage-app51914828-2cd9dce39107.pages.vk-apps.com/index.html)
+[vk.com](https://prod-app51914828-ad754b6e14b2.pages-ac.vk-apps.com/index.html)
 
-[iOS & Android](https://stage-app51914828-2cd9dce39107.pages.vk-apps.com/index.html)
+[iOS & Android](https://prod-app51914828-ad754b6e14b2.pages-ac.vk-apps.com/index.html)
 
-[m.vk.com](https://stage-app51914828-2cd9dce39107.pages.vk-apps.com/index.html)
+[m.vk.com](https://prod-app51914828-ad754b6e14b2.pages-ac.vk-apps.com/index.html)
 
 ## 🚀 Запуск мини приложения
 
